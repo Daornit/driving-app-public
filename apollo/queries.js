@@ -1,18 +1,13 @@
 
 import gql from 'graphql-tag';
 
-export const USERS_QUERY = gql`
+export const COURSES_QUERY = gql`
 query courses {
   courses {
     _id
     name
     description
-  }
-}
-query posts{
-  posts {
-    title
-    description
+    image
   }
 }
 `;

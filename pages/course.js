@@ -77,6 +77,7 @@ class IndexPage extends React.Component {
                     <Head>
                         <title>Driving app</title>
                         {/* <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" /> */}
+                        <link rel="stylesheet" type="text/css" href="/css/styles.css"></link>
                     </Head>
 
                     <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
