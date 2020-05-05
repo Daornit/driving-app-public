@@ -11,9 +11,9 @@ const CourseInformation = (props) => {
             {
                     courses.map(course => 
                         <div key={course._id} className="courseContent">
-                            <span className="image main"><img src="/static/images/batkhuleg.png" alt="" width="500"/></span>
+                            <span className="image main"><img src={course.image} alt="" width="500"/></span>
                             <h3>{course.name}</h3>
-                            <button><a  onClick={() => {props.onOpenArticle(course._id)}}>Дэлгэрэнгүй</a></button>
+                            <button><a onClick={() => {props.onOpenArticle(course._id)}}>Дэлгэрэнгүй</a></button>
                         </div>
                     )
                 }

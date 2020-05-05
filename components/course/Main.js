@@ -9,7 +9,7 @@ import faGithub from '@fortawesome/fontawesome-free-brands/faGithub'
 
 class Main extends React.Component {
   render() {
-
+    console.log(this.props.courses )
     let close = <div className="close" onClick={() => {this.props.onCloseArticle()}}></div>
 
     return (
@@ -50,14 +50,20 @@ class Main extends React.Component {
           <p>.</p>
           {close}
         </article>
-        <article id="bat" className={`${this.props.article === 'bat' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+        <article className={`${this.props.article === 'bat' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
           <h2 className="major">Батхүлэг</h2>
           <span className="image main"><img src="/static/images/batkhuleg_details.jpg" alt="" /></span>
           <p>Батхүлэг авто жолооны дамжаа нь Улаанбаатар хотын 5 дүүрэгт өөрийн 7 байр, мөн түрээсийн 2 байртайгаар 9 салбартай үйл ажиллагаагаа явуулж байна. Бүгд хичээлийн анги танхимууд компьютержсэн, LCD TV-тэй, плакат, үзүүлэн, мэргэжлийн ном, сурах бичиг, гарын авлагаар сайн хангагдсан. Багш нарын 80 хувь нь  наймаас дээш жил багшилсан, мэргэжлийн үнэмлэхтэй, мэргэшсэн багшийн үнэмлэхтэй,дадлага туршлагатай багш нар ажилладаг, чадварын түвшин судалгаагаар өндөр байна.</p>
           <button><a href="/register" onClick={() => {props.onOpenArticle('')}}>Бүртгүүлэх</a></button>
           {close}
         </article>
-
+        {this.props.courses.map(course => <article key={course._id} className={`${this.props.article === course._id ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+          <h2 className="major">{course.name}</h2>
+          <span className="image main"><img src={course.image} alt="" /></span>
+          <p>{course.description}</p>
+          <button><a href="http://localhost:3500/register" onClick={() => {props.onOpenArticle('')}}>Бүртгүүлэх</a></button>
+          {close}
+        </article>)}
         <article id="contact" className={`${this.props.article === 'contact' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
           <h2 className="major">Бидэнтэй холбогдох</h2>
           <form method="post" action="#">
