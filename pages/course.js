@@ -90,6 +90,7 @@ class CoursePage extends React.Component {
                         <div id="wrapper">
 
                             <Main
+                                posts={[]}
                                 courses={this.state.courses}
                                 isArticleVisible={this.state.isArticleVisible}
                                 timeout={this.state.timeout}

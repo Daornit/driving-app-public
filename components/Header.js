@@ -6,7 +6,7 @@ import faUser from '@fortawesome/fontawesome-free-regular/faUser'
 const Header = (props) => (
     <>
     <div className="login_icon">
-            <a  onClick={() => {props.onOpenArticle('login')}}>
+            <a href="http://localhost:3500/login">
               <FontAwesomeIcon icon={faUser} />
             </a>
         </div>

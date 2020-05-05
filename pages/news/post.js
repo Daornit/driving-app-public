@@ -1,5 +1,6 @@
 import Head from "next/head"
 import stylesheet from 'styles/post/main.scss'
+import axios from 'axios';
 
 import Header from "../../components/course/Header"
 import PostMain from "../../components/news/content/post/postMain"
@@ -23,6 +24,10 @@ class IndexPage extends React.Component {
         this.timeoutId = setTimeout(() => {
             this.setState({ loading: "" })
         }, 100)
+        axios.post('https://driving-app-graphql.herokuapp.com/graphql', {"operationName":"posts","variables":{},"query":"query posts {\n  posts {\n    _id\n    title\n    description\n    image\n    createdDate\n    author {\n      username\n    }\n  }\n}\n"})
+        .then(res=> {
+            this.setState({posts: res.data.data.posts})
+        });
     }
 
     componentWillUnmount() {
@@ -32,6 +37,7 @@ class IndexPage extends React.Component {
     }
 
     handleOpenArticle(article) {
+        console.log(article);
         this.setState({
             isArticleVisible: !this.state.isArticleVisible,
             article
@@ -79,18 +85,22 @@ class IndexPage extends React.Component {
 
                     <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
                     <Header onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
-                    <PostMain onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
-                    <div id="wrapper">
-                        
-                        <Main
-                            isArticleVisible={this.state.isArticleVisible}
-                            timeout={this.state.timeout}
-                            articleTimeout={this.state.articleTimeout}
-                            article={this.state.article}
-                            onCloseArticle={this.handleCloseArticle}
-                        />
 
-                    </div>
+                    {this.state.posts? <>
+                        <PostMain posts={this.state.posts} onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
+                        <div id="wrapper">
+                            <Main
+                                courses={[]}
+                                posts={this.state.posts}
+                                isArticleVisible={this.state.isArticleVisible}
+                                timeout={this.state.timeout}
+                                articleTimeout={this.state.articleTimeout}
+                                article={this.state.article}
+                                onCloseArticle={this.handleCloseArticle}
+                            />
+                        </div>
+                    </>: ""}
+                    
                     <div>
                         
                     </div>

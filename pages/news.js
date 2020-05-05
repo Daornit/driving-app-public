@@ -2,7 +2,6 @@ import Head from "next/head"
 import stylesheet from 'styles/course/main.scss'
 
 import Header from "../components/course/Header"
-
 import Main from "../components/course/Main"
 import NewsMain from "../components/news/newsMain"
 
@@ -14,7 +13,8 @@ class IndexPage extends React.Component {
             timeout: false,
             articleTimeout: false,
             article: "",
-            loading: "is-loading"
+            loading: "is-loading",
+            posts: []
         }
         this.handleOpenArticle = this.handleOpenArticle.bind(this)
         this.handleCloseArticle = this.handleCloseArticle.bind(this)
@@ -88,6 +88,8 @@ class IndexPage extends React.Component {
                     <div id="wrapper">
                         
                         <Main
+                            courses={[]}
+                            posts={[]}
                             isArticleVisible={this.state.isArticleVisible}
                             timeout={this.state.timeout}
                             articleTimeout={this.state.articleTimeout}

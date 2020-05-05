@@ -8,12 +8,22 @@ import faGithub from '@fortawesome/fontawesome-free-brands/faGithub'
 
 class Main extends React.Component {
   render() {
-
     let close = <div className="close" onClick={() => {this.props.onCloseArticle()}}></div>
 
     return (
       <>
       <div id="main" style={this.props.timeout ? {display: 'flex'} : {display: 'none'}}>
+
+        {this.props.posts.map(post => (
+          <article key={post._id} id="intro" className={`${this.props.article === post._id ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+            <h2 className="major">{post.title}</h2>
+            <span className="image main"><img src={post.image} alt="" /></span>
+            <p>{post.description}</p>
+            <p style={{margin: 0}}>Үүсгэсэн огноо {post.createdDate}</p>
+            <p style={{margin: 0}}>Зохиогч {post.author.username}</p>
+            {close}
+          </article>
+        ))}
 
         <article id="intro" className={`${this.props.article === 'intro' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
           <h2 className="major">Бидний тухай</h2>
