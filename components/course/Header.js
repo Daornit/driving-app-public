@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faUser from '@fortawesome/fontawesome-free-regular/faUser'
@@ -5,7 +6,7 @@ import faUser from '@fortawesome/fontawesome-free-regular/faUser'
 const Header = (props) => (
     <>
     <div className="icons">
-            <a href="javascript:;" onClick={() => {props.onOpenArticle('login')}}>
+            <a  onClick={() => {props.onOpenArticle('login')}}>
               <FontAwesomeIcon icon={faUser} />
             </a>
         </div>
@@ -13,11 +14,11 @@ const Header = (props) => (
         
         <nav>
             <ul>
-                <li><a href="/course" onClick={() => {props.onOpenArsticle('course')}}>Жолооны курс</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('answer')}}>Асуулт хариулт</a></li>
-                <li><a href="/news" onClick={() => {props.onOpenArticle('')}}>Мэдээ мэдээлэл</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('use')}}>Хэрхэн ашиглах</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('contact')}}>Бидэнтэй холбогдох</a></li>
+                <li><Link href="/course"><a>Жолооны курс</a></Link></li>
+                <li><a onClick={() => {props.onOpenArticle('answer')}}>Асуулт хариулт</a></li>
+                <li><Link href="/news"><a>Мэдээ мэдээлэл</a></Link></li>
+                <li><a onClick={() => {props.onOpenArticle('use')}}>Хэрхэн ашиглах</a></li>
+                <li><a onClick={() => {props.onOpenArticle('contact')}}>Бидэнтэй холбогдох</a></li>
             </ul>
         </nav>
     </header>

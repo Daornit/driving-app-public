@@ -10,7 +10,7 @@ const AdviceMain = (props) => (
                 <div className="adviceDesc">
                     <h3>ШӨНӨ ХЭРХЭН АЮУЛГҮЙ МАШИН БАРИХ ВЭ???</h3>
                     <p>Муу явдаг машин гэж байдаггүй харин муу жолооддог жолооч гэж байдаг. Автомашин барих тэр дундаа шөнө автомашин барих маш хэцүү ба шөнө харанхуй болсон үед аваар осол гарах нь хүртэл их байдаг...</p>
-                    <button><a href="javascript:;" onClick={() => {props.onOpenArticle('advice1')}}>Дэлгэрэнгүй</a></button>
+                    <button><a  onClick={() => {props.onOpenArticle('advice1')}}>Дэлгэрэнгүй</a></button>
                 </div>
             </div>
         

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faUser from '@fortawesome/fontawesome-free-regular/faUser'
@@ -5,7 +6,7 @@ import faUser from '@fortawesome/fontawesome-free-regular/faUser'
 const Header = (props) => (
     <>
     <div className="login_icon">
-            <a href="javascript:;" onClick={() => {props.onOpenArticle('login')}}>
+            <a  onClick={() => {props.onOpenArticle('login')}}>
               <FontAwesomeIcon icon={faUser} />
             </a>
         </div>
@@ -17,18 +18,18 @@ const Header = (props) => (
         </div>
         <div className="content">
             <div className="inner">
-                <h1>UB Drive</h1>
+                <h1>UB Drive</h1>javascript
                 <p>Ухаалаг шийдлээр таны цагийг хэмнэнэ.</p>
-                <button><a href="javascript:;" onClick={() => {props.onOpenArticle('intro')}}>Дэлгэрэнгүй</a></button>
+                <button><a onClick={() => {props.onOpenArticle('intro')}}>Дэлгэрэнгүй</a></button>
             </div>
         </div>
         <nav>
             <ul>
-                <li><a href="/course" onClick={() => {props.onOpenArticle('')}}>Жолооны курс</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('answer')}}>Асуулт хариулт</a></li>
-                <li><a href="/news" onClick={() => {props.onOpenArticle('')}}>Мэдээ мэдээлэл</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('use')}}>Хэрхэн ашиглах</a></li>
-                <li><a href="javascript:;" onClick={() => {props.onOpenArticle('contact')}}>Бидэнтэй холбогдох</a></li>
+                <li><Link href="/course"><a>Жолооны курс</a></Link></li>
+                <li><a onClick={() => {props.onOpenArticle('answer')}}>Асуулт хариулт</a></li>
+                <li><Link href="/news"><a>Мэдээ мэдээлэл</a></Link></li>
+                <li><a onClick={() => {props.onOpenArticle('use')}}>Хэрхэн ашиглах</a></li>
+                <li><a onClick={() => {props.onOpenArticle('contact')}}>Бидэнтэй холбогдох</a></li>
             </ul>
         </nav>
     </header>

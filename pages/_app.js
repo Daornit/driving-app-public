@@ -1,19 +1,14 @@
 import React from 'react';
 import App from 'next/app';
-import { ApolloProvider } from '@apollo/react-hooks';
-
-import withData from '../apollo/apollo.js';
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps, apollo } = this.props;
+    const { Component, pageProps } = this.props;
     return (
-      <ApolloProvider client={apollo}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <Component {...pageProps} />
     );
   }
 }
 
 // Wraps all components in the tree with the data provider
-export default withData(MyApp);
+export default MyApp;

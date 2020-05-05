@@ -10,7 +10,7 @@ const PostMain = (props) => (
                 <div className="postDesc">
                     <h2>БАТХҮЛЭГ</h2>
                     <p>Батхүлэг автосургууль нь B болон BC ангилалдаа хямдрал зарлалаа.</p>
-                    <button><a href="javascript:;" onClick={() => {props.onOpenArticle('bat')}}>Дэлгэрэнгүй</a></button>
+                    <button><a  onClick={() => {props.onOpenArticle('bat')}}>Дэлгэрэнгүй</a></button>
                 </div>
             </div>
         

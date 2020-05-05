@@ -1,108 +1,101 @@
 import Head from "next/head"
 import stylesheet from 'styles/course/main.scss'
-
+import axios from 'axios';
 
 import Header from "../components/course/Header"
 import CourseInformation from "../components/course/courses/CourseInformation"
 import Main from "../components/course/Main"
 
 
-class IndexPage extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isArticleVisible: false,
-            timeout: false,
-            articleTimeout: false,
-            article: "",
-            loading: "is-loading"
-        }
-        this.handleOpenArticle = this.handleOpenArticle.bind(this)
-        this.handleCloseArticle = this.handleCloseArticle.bind(this)
-    }
+function CoursePage(props) {
 
-    componentDidMount() {
-        this.timeoutId = setTimeout(() => {
-            this.setState({ loading: "" })
-        }, 100)
-    }
+    const [state, setState] = React.useState({
+        isArticleVisible: false,
+        timeout: false,
+        articleTimeout: false,
+        article: "",
+        loading: "is-loading",
+        courses: []
+    });
 
-    componentWillUnmount() {
-        if (this.timeoutId) {
-            clearTimeout(this.timeoutId)
-        }
-    }
+    React.useEffect(()=>{
+      setTimeout(() => {
+        setState({ loading: "" })
+      }, 100)
 
-    handleOpenArticle(article) {
-        this.setState({
-            isArticleVisible: !this.state.isArticleVisible,
+      axios.post('https://driving-app-graphql.herokuapp.com/graphql', {"operationName":"courses","variables":{},"query":"query courses {\n  courses {\n    _id\n    name\n    description\n    image\n  }\n}\n"})
+      .then(res=>setState({courses: res.data.data.courses}));
+    }, []);
+
+    const handleOpenArticle = (article) => {
+        setState({
+            isArticleVisible: !state.isArticleVisible,
             article
         })
 
         setTimeout(() => {
-            this.setState({
-                timeout: !this.state.timeout
+            setState({
+                timeout: !state.timeout
             })
         }, 325)
 
         setTimeout(() => {
-            this.setState({
-                articleTimeout: !this.state.articleTimeout
+            setState({
+                articleTimeout: !state.articleTimeout
             })
         }, 350)
     }
 
-    handleCloseArticle() {
-        this.setState({
-            articleTimeout: !this.state.articleTimeout
+    const handleCloseArticle = () => {
+        setState({
+            articleTimeout: !state.articleTimeout
         })
 
         setTimeout(() => {
-            this.setState({
-                timeout: !this.state.timeout
+            setState({
+                timeout: !state.timeout
             })
         }, 325)
 
         setTimeout(() => {
-            this.setState({
-                isArticleVisible: !this.state.isArticleVisible,
+            setState({
+                isArticleVisible: !state.isArticleVisible,
                 article: ""
             })
         }, 350)
     }
-    render() {
-        return (
-            <div className={`body ${this.state.loading} ${this.state.isArticleVisible ? "is-article-visible" : ""}`}>
-                <div>
-                    <Head>
-                        <title>Driving app</title>
-                        {/* <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" /> */}
-                        <link rel="stylesheet" type="text/css" href="/css/styles.css"></link>
-                    </Head>
 
-                    <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-                    <Header onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
-                    <CourseInformation onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
-                    <div id="wrapper">
-                        
-                        <Main
-                            isArticleVisible={this.state.isArticleVisible}
-                            timeout={this.state.timeout}
-                            articleTimeout={this.state.articleTimeout}
-                            article={this.state.article}
-                            onCloseArticle={this.handleCloseArticle}
-                        />
+    return (
+      <div className={`body ${state.loading} ${state.isArticleVisible ? "is-article-visible" : ""}`}>
+          <div>
+              <Head>
+                  <title>Driving app</title>
+                  {/* <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" /> */}
+              </Head>
 
-                    </div>
-                    <div>
-                        
-                    </div>
+              <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+              <Header onOpenArticle={handleOpenArticle} timeout={state.timeout} />
+              <CourseInformation courses={state.courses} onOpenArticle={handleOpenArticle} timeout={state.timeout} />
+              <div id="wrapper">
+                  
+                  <Main
+                      courses={state.courses} 
+                      isArticleVisible={state.isArticleVisible}
+                      timeout={state.timeout}
+                      articleTimeout={state.articleTimeout}
+                      article={state.article}
+                      onCloseArticle={handleCloseArticle}
+                  />
 
-                    <div id="bg" />
-                </div>
-            </div>
-        )
-    }
+              </div>
+              <div>
+                  
+              </div>
+
+              <div id="bg" />
+          </div>
+      </div>
+  )
 }
 
-export default IndexPage
+export default CoursePage;
