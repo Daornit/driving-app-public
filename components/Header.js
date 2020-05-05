@@ -6,9 +6,11 @@ import faUser from '@fortawesome/fontawesome-free-regular/faUser'
 const Header = (props) => (
     <>
     <div className="login_icon">
-            <a href="http://localhost:3500/login">
-              <FontAwesomeIcon icon={faUser} />
-            </a>
+            <Link href="http://localhost:3000/login">
+                <a>
+                    <FontAwesomeIcon icon={faUser} />
+                </a>
+            </Link>
         </div>
     <header id="header" style={props.timeout ? {display: 'none'} : {}}>
         <div className="logo">      
